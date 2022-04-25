@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dislinkt.Posts.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Dislinkt.Posts.WebApi.Controllers.PostsController">
+            <summary>
+            Posts controler
+            </summary>
+        </member>
+        <member name="T:Dislinkt.Posts.WebApi.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Program.Main(System.String[])">
+            <summary>
+            Main
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Register new user
+            </summary>
+        </member>
+        <member name="T:Dislinkt.Posts.WebApi.Startup">
+            <summary>
+            Startup
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup constructor
+            </summary>
+        </member>
+        <member name="P:Dislinkt.Posts.WebApi.Startup.Configuration">
+            <summary>
+            Configurtion parameter
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Confifure services
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Configure web api
+            </summary>
+        </member>
+    </members>
+</doc>
