@@ -35,7 +35,7 @@ namespace Dislinkt.Posts.WebApi
         public IConfiguration Configuration { get; }
 
         /// <summary>
-        /// Confifure services
+        /// Configure services
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
