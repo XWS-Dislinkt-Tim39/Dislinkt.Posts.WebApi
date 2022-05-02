@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediatR, Version=8.0.1.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediatR.8.0.1\lib\net461\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Posts\NewPost\Commands\NewPostCommand.cs" />
+    <Compile Include="Posts\NewPost\Commands\NewPostHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dislinkt.Posts.Core\Dislinkt.Posts.Core.csproj">
+      <Project>{49e671ff-95fc-4971-8547-d1892f33d5f8}</Project>
+      <Name>Dislinkt.Posts.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dislinkt.Posts.Domain\Dislinkt.Posts.Domain.csproj">
+      <Project>{34f9fded-0973-4dab-a5da-cc66eb70813d}</Project>
+      <Name>Dislinkt.Posts.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dislinkt.Posts\Dislinkt.Posts.csproj">
+      <Project>{50e8c9a9-30bb-4e87-a078-541af444e53d}</Project>
+      <Name>Dislinkt.Posts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

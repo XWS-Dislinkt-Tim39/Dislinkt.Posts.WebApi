@@ -13,6 +13,11 @@ using MongoDB.Bson;
 using Dislinkt.Posts.Persistance.MongoDB.Common;
 using System.Reflection;
 using System.IO;
+using MediatR;
+using Dislinkt.Posts.Application.Posts.NewPost;
+using Dislinkt.Posts.Persistance.MongoDB.Factories;
+using Dislinkt.Posts.Core.Repositories;
+using Dislinkt.Posts.Persistance.MongoDB.Repositories;
 
 namespace Dislinkt.Posts.WebApi
 {
@@ -45,7 +50,7 @@ namespace Dislinkt.Posts.WebApi
             {
                 opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             }).AddJsonOptions(options =>
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); ;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); 
 
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +68,14 @@ namespace Dislinkt.Posts.WebApi
                 options.Connection = Configuration.GetSection("MongoSettings:ConnectionString").Value;
                 options.DatabaseName = Configuration.GetSection("MongoSettings:DatabaseName").Value;
             });
+            
+            services.AddMediatR(typeof(NewPostCommand).GetTypeInfo().Assembly);
+            services.AddScoped<IDatabaseFactory, DatabaseFactory>();
+            services.AddScoped<IQueryExecutor, QueryExecutor>();
+            services.AddScoped<IPostRepository, PostRepository>();
+           
+            services.AddScoped<MongoDbContext>();
+
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
         }
 

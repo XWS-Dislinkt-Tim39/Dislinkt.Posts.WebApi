@@ -9,6 +9,18 @@
             Posts controler
             </summary>
         </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Init of controller
+            </summary>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.AddPostAsync(Dislinkt.Posts.PostData)">
+            <summary>
+            Add new post
+            </summary>
+            <returns>Status of publishing post</returns>
+            /// <param name="postData">for post</param>
+        </member>
         <member name="T:Dislinkt.Posts.WebApi.Program">
             <summary>
             Program
@@ -41,7 +53,7 @@
         </member>
         <member name="M:Dislinkt.Posts.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            Confifure services
+            Configure services
             </summary>
         </member>
         <member name="M:Dislinkt.Posts.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
