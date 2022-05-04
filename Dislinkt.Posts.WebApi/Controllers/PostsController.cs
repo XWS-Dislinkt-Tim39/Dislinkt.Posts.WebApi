@@ -1,7 +1,11 @@
 ﻿using Dislinkt.Posts.Application.Posts.NewPost;
+using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
+using Dislinkt.Posts.Domain.Posts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Dislinkt.Posts.WebApi.Controllers
@@ -33,6 +37,19 @@ namespace Dislinkt.Posts.WebApi.Controllers
         public async Task<bool> AddPostAsync(PostData postData)
         {
             return await _mediator.Send(new NewPostCommand(postData));
+
+        }
+        /// <summary>
+        /// Get all user posts
+        /// </summary>
+        /// <returns>All user posts</returns>
+        /// /// <param name="id">for user</param>
+        [HttpPost]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/user-posts")]
+        public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)
+        {
+            return await _mediator.Send(new ShowPostsCommand(id));
 
         }
     }

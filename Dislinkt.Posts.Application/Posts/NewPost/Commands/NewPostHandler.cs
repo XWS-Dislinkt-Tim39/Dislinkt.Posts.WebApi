@@ -1,6 +1,8 @@
 ﻿using Dislinkt.Posts.Core.Repositories;
+using Dislinkt.Posts.Domain.Posts;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +17,18 @@ namespace Dislinkt.Posts.Application.Posts.NewPost
         }
         public async Task<bool> Handle(NewPostCommand request, CancellationToken cancellationToken)
         {
-            await _postRepository.AddAsync(new Domain.Posts.Post(Guid.NewGuid(), request.Request.UserId, request.Request.Text, request.Request.DateTimeOfPublishing));
+            var userPosts = await _postRepository.GetByUserId(request.Request.UserId);
+
+            if(userPosts == null)
+            {
+                await _postRepository.CreateAsync(new Domain.Users.UserPosts(Guid.NewGuid(), request.Request.UserId,
+                    new[] { new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing) }));
+
+                return true;
+            }
+
+            var posts = userPosts.Posts.Append(new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing));
+            await _postRepository.UpdateAsync(userPosts.Id, posts.ToArray());
 
             return true;
         }

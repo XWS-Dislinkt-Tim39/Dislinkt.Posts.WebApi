@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Posts\NewPost\Commands\NewPostCommand.cs" />
     <Compile Include="Posts\NewPost\Commands\NewPostHandler.cs" />
+    <Compile Include="Posts\ShowPosts\Commands\ShowPostsCommand.cs" />
+    <Compile Include="Posts\ShowPosts\Commands\ShowPostsHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +67,6 @@
       <Name>Dislinkt.Posts</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

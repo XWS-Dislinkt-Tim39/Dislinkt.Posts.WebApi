@@ -133,6 +133,7 @@
     <Compile Include="Common\QueryExecutor.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\PostEntity.cs" />
+    <Compile Include="Entities\UserPostsEntity.cs" />
     <Compile Include="Factories\DatabaseFactory.cs" />
     <Compile Include="Factories\IDatabaseFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
