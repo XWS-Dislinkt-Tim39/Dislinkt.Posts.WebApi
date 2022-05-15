@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommentData.cs" />
+    <Compile Include="LikePostData.cs" />
     <Compile Include="PostData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

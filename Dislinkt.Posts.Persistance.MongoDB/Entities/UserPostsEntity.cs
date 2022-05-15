@@ -12,7 +12,7 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Entities
         public PostEntity[] Posts { get; set; }
 
         public UserPosts ToUserPosts()
-            => new UserPosts(this.Id, this.UserId, this.Posts.Select(s => s.ToPost()).ToArray());
+            => new UserPosts(this.Id, this.UserId, this.Posts?.Select(s => s.ToPost())?.ToArray());
 
         public static UserPostsEntity ToUserPostsEntity(UserPosts userPosts)
         {
@@ -20,7 +20,7 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Entities
             {
                 Id = userPosts.Id,
                 UserId = userPosts.UserId,
-                Posts = userPosts.Posts.Select(s => PostEntity.ToPostEntity(s)).ToArray()
+                Posts = userPosts.Posts?.Select(s => PostEntity.ToPostEntity(s))?.ToArray()
             };
         }
     }

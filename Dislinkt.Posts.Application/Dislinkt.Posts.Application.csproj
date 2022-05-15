@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Posts\AddComment\Commands\AddCommentCommand.cs" />
+    <Compile Include="Posts\AddComment\Commands\AddCommentHandler.cs" />
+    <Compile Include="Posts\LikePost\Commands\LikePostCommand.cs" />
+    <Compile Include="Posts\LikePost\Commands\LikePostHandler.cs" />
     <Compile Include="Posts\NewPost\Commands\NewPostCommand.cs" />
     <Compile Include="Posts\NewPost\Commands\NewPostHandler.cs" />
     <Compile Include="Posts\ShowPosts\Commands\ShowPostsCommand.cs" />

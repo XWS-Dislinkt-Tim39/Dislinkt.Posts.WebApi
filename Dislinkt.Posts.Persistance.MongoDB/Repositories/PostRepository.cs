@@ -5,7 +5,6 @@ using Dislinkt.Posts.Persistance.MongoDB.Entities;
 using MongoDB.Driver;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dislinkt.Posts.Domain.Users;
 
@@ -31,11 +30,23 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             }
         }
 
+        public async Task AddCommentAsync(Guid userId, Guid id, Comment[] comments)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.Eq(u => u.UserId, userId)
+                & Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, id));
+
+            var update = Builders<UserPostsEntity>.Update
+                .Set(u => u.Posts[-1].Comments, comments.Select(a => CommentEntity.ToCommentEntity(a)));
+
+            await _queryExecutor.UpdateAsync(filter, update);
+        }
+
         public async Task CreateAsync(UserPosts userPosts)
         {
             try
             {
                 await _queryExecutor.CreateAsync(UserPostsEntity.ToUserPostsEntity(userPosts));
+
             } catch(MongoWriteException ex)
             {
                 throw ex;
@@ -49,6 +60,17 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             var result = await _queryExecutor.FindAsync(filter);
 
             return result?.AsEnumerable()?.FirstOrDefault()?.ToUserPosts() ?? null;
+        }
+
+        public async Task LikePostAsync(Guid userId, Guid postId, Guid[] userIds)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.Eq(u => u.Id, userId)
+                & Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, postId));
+
+            var update = Builders<UserPostsEntity>.Update
+                .Set(u => u.Posts[-1].UsersLiked, userIds);
+
+            await _queryExecutor.UpdateAsync(filter, update);
         }
 
         public async Task UpdateAsync(Guid id, Post[] posts)

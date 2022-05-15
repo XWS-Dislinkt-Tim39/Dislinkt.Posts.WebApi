@@ -11,5 +11,7 @@ namespace Dislinkt.Posts.Core.Repositories
         Task<UserPosts> GetByUserId(Guid userId);
         Task CreateAsync(UserPosts userPosts);
         Task UpdateAsync(Guid id, Post[] posts);
+        Task AddCommentAsync(Guid userId, Guid id, Comment[] comments);
+        Task LikePostAsync(Guid publisherId, Guid postId, Guid[] userIds);
     }
 }
