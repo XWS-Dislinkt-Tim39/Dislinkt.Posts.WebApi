@@ -2,6 +2,7 @@
 using Dislinkt.Posts.Application.Posts.LikePost.Commands;
 using Dislinkt.Posts.Application.Posts.NewPost;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
+using Dislinkt.Posts.Application.Posts.UnlikePost.Commands;
 using Dislinkt.Posts.Domain.Posts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,19 @@ namespace Dislinkt.Posts.WebApi.Controllers
         public async Task<bool> LikePostAsync(LikePostData likePostData)
         {
             return await _mediator.Send(new LikePostCommand(likePostData));
+
+        }
+        /// <summary>
+        /// Unlike post
+        /// </summary>
+        /// <returns>Boolean status of unliking post</returns>
+        /// /// <param name="unlikePostData">for like</param>
+        [HttpPost]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/unlike-post")]
+        public async Task<bool> UnlikePostAsync(UnlikePostData unlikePostData)
+        {
+            return await _mediator.Send(new UnlikePostCommand(unlikePostData));
 
         }
     }

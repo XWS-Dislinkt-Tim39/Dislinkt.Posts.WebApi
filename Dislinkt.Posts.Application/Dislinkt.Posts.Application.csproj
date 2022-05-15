@@ -52,6 +52,8 @@
     <Compile Include="Posts\NewPost\Commands\NewPostHandler.cs" />
     <Compile Include="Posts\ShowPosts\Commands\ShowPostsCommand.cs" />
     <Compile Include="Posts\ShowPosts\Commands\ShowPostsHandler.cs" />
+    <Compile Include="Posts\UnlikePost\Commands\UnlikePostCommand.cs" />
+    <Compile Include="Posts\UnlikePost\Commands\UnlikePostHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
