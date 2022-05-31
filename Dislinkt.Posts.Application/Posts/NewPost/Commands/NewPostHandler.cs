@@ -1,4 +1,5 @@
 ﻿using Dislinkt.Posts.Core.Repositories;
+using Dislinkt.Posts.Domain.Comments;
 using Dislinkt.Posts.Domain.Posts;
 using MediatR;
 using System;
@@ -22,12 +23,12 @@ namespace Dislinkt.Posts.Application.Posts.NewPost
             if(userPosts == null)
             {
                 await _postRepository.CreateAsync(new Domain.Users.UserPosts(Guid.NewGuid(), request.Request.UserId,
-                    new[] { new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing) }));
+                    new[] { new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing, Array.Empty<Guid>(), Array.Empty<Guid>(), Array.Empty<Comment>()) }));
 
                 return true;
             }
 
-            var posts = userPosts.Posts.Append(new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing));
+            var posts = userPosts.Posts.Append(new Post(Guid.NewGuid(), request.Request.Text, request.Request.DateTimeOfPublishing, Array.Empty<Guid>(), Array.Empty<Guid>(), Array.Empty<Comment>()));
             await _postRepository.UpdateAsync(userPosts.Id, posts.ToArray());
 
             return true;

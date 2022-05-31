@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dislinkt.Posts.Domain.Comments;
+using System;
 
 namespace Dislinkt.Posts
 {
@@ -16,5 +17,7 @@ namespace Dislinkt.Posts
         /// Date time of publishing+
         /// </summary>
         public DateTime DateTimeOfPublishing { get; set; }
+      
+       
     }
 }

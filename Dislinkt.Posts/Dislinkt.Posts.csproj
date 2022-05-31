@@ -44,5 +44,11 @@
     <Compile Include="PostData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dislinkt.Posts.Domain\Dislinkt.Posts.Domain.csproj">
+      <Project>{34F9FDED-0973-4DAB-A5DA-CC66EB70813D}</Project>
+      <Name>Dislinkt.Posts.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

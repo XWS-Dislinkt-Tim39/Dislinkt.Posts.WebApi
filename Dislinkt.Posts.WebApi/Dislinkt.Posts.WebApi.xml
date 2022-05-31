@@ -21,6 +21,13 @@
             <returns>Status of publishing post</returns>
             /// <param name="postData">for post</param>
         </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.GetUserPostsAsync(System.Guid)">
+            <summary>
+            Get all user posts
+            </summary>
+            <returns>All user posts</returns>
+            /// <param name="id">for user</param>
+        </member>
         <member name="T:Dislinkt.Posts.WebApi.Program">
             <summary>
             Program
