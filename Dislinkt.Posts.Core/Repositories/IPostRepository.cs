@@ -9,6 +9,10 @@ namespace Dislinkt.Posts.Core.Repositories
     {
         Task AddAsync(Post post);
         Task<UserPosts> GetByUserId(Guid userId);
+        Task<UserPosts> GetById(Guid id);
+        Task AddLikeToUserPostAsync(Guid userId,Guid postId);
+
+        
         Task CreateAsync(UserPosts userPosts);
         Task UpdateAsync(Guid id, Post[] posts);
     }
