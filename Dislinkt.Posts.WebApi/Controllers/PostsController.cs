@@ -1,4 +1,5 @@
 ﻿using Dislinkt.Posts.Application.Posts.NewPost;
+using Dislinkt.Posts.Application.Posts.PostDislike.Commands;
 using Dislinkt.Posts.Application.Posts.PostLike.Commands;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
 using Dislinkt.Posts.Domain.Posts;
@@ -41,7 +42,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
 
         }
         /// <summary>
-        /// Get all user posts
+        /// add Like to post
         /// </summary>
         /// <returns>bool</returns>
         /// /// <param name="userId">for user</param>
@@ -52,6 +53,48 @@ namespace Dislinkt.Posts.WebApi.Controllers
         public async Task<bool> AddLikePostAsync(Guid userId,Guid postId)
         {
             return await _mediator.Send(new AddLikePostCommand(userId,postId));
+
+        }
+        /// <summary>
+        /// remove like from post
+        /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/remove-like")]
+        public async Task<bool> RemoveLikePostAsync(Guid userId, Guid postId)
+        {
+            return await _mediator.Send(new RemoveLikePostCommand(userId, postId));
+
+        }
+        /// <summary>
+        /// add dislike to post
+        /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/add-dislike")]
+        public async Task<bool> AddDislikePostAsync(Guid userId, Guid postId)
+        {
+            return await _mediator.Send(new AddDislikeCommand(userId, postId));
+
+        }
+        /// <summary>
+        /// remove dislike from post
+        /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/remove-dislike")]
+        public async Task<bool> RemoveDislikePostAsync(Guid userId, Guid postId)
+        {
+            return await _mediator.Send(new RemoveDislikeCommand(userId, postId));
 
         }
         /// <summary>
