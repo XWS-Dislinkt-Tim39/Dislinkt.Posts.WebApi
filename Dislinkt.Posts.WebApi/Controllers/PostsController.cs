@@ -1,4 +1,5 @@
 ﻿using Dislinkt.Posts.Application.Posts.NewPost;
+using Dislinkt.Posts.Application.Posts.PostLike.Commands;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
 using Dislinkt.Posts.Domain.Posts;
 using MediatR;
@@ -42,9 +43,23 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <summary>
         /// Get all user posts
         /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/add-like")]
+        public async Task<bool> AddLikePostAsync(Guid userId,Guid postId)
+        {
+            return await _mediator.Send(new AddLikePostCommand(userId,postId));
+
+        }
+        /// <summary>
+        /// Get all user posts
+        /// </summary>
         /// <returns>All user posts</returns>
         /// /// <param name="id">for user</param>
-        [HttpPost]
+        [HttpGet]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/user-posts")]
         public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)

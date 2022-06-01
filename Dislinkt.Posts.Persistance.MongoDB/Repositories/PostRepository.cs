@@ -51,6 +51,23 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             return result?.AsEnumerable()?.FirstOrDefault()?.ToUserPosts() ?? null;
         }
 
+        public async Task<UserPosts> GetById(Guid id)
+        {
+            var result = await _queryExecutor.FindByIdAsync<UserPostsEntity>(id);
+
+            return result?.ToUserPosts() ?? null;
+        }
+
+        public async Task AddLikeToUserPostAsync(Guid userId, Guid postId)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, postId));
+
+            var update = Builders<UserPostsEntity>.Update.AddToSet(u => u.Posts[-1].Likes, userId);
+
+
+            await _queryExecutor.UpdateAsync(filter, update);
+        }
+
         public async Task UpdateAsync(Guid id, Post[] posts)
         {
             var filter = Builders<UserPostsEntity>.Filter.Eq(u => u.Id, id);
