@@ -11,8 +11,9 @@ namespace Dislinkt.Posts.Core.Repositories
         Task<UserPosts> GetByUserId(Guid userId);
         Task<UserPosts> GetById(Guid id);
         Task AddLikeToUserPostAsync(Guid userId,Guid postId);
+        Task AddDislikeToUserPostAsync(Guid userId, Guid postId);
 
-        
+
         Task CreateAsync(UserPosts userPosts);
         Task UpdateAsync(Guid id, Post[] posts);
     }

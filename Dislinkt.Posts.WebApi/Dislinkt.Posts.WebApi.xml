@@ -23,7 +23,15 @@
         </member>
         <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.AddLikePostAsync(System.Guid,System.Guid)">
             <summary>
-            Get all user posts
+            add Like to post
+            </summary>
+            <returns>bool</returns>
+            /// <param name="userId">for user</param>
+            /// <param name="postId">for post</param>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.AddDislikePostAsync(System.Guid,System.Guid)">
+            <summary>
+            add Like to post
             </summary>
             <returns>bool</returns>
             /// <param name="userId">for user</param>

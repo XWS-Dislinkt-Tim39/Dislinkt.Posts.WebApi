@@ -68,6 +68,17 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             await _queryExecutor.UpdateAsync(filter, update);
         }
 
+        public async Task AddDislikeToUserPostAsync(Guid userId, Guid postId)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, postId));
+
+            var update = Builders<UserPostsEntity>.Update.AddToSet(u => u.Posts[-1].Dislikes, userId);
+
+
+            await _queryExecutor.UpdateAsync(filter, update);
+        }
+
+
         public async Task UpdateAsync(Guid id, Post[] posts)
         {
             var filter = Builders<UserPostsEntity>.Filter.Eq(u => u.Id, id);

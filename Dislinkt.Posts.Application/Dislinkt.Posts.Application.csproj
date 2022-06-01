@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Posts\NewPost\Commands\NewPostCommand.cs" />
     <Compile Include="Posts\NewPost\Commands\NewPostHandler.cs" />
+    <Compile Include="Posts\PostDislike\Commands\AddDislikeCommand.cs" />
+    <Compile Include="Posts\PostDislike\Commands\AddDislikeHandler.cs" />
     <Compile Include="Posts\PostLike\Commands\AddLikePostCommand.cs" />
     <Compile Include="Posts\PostLike\Commands\AddLikePostHandler.cs" />
     <Compile Include="Posts\ShowPosts\Commands\ShowPostsCommand.cs" />
