@@ -56,7 +56,21 @@ namespace Dislinkt.Posts.WebApi.Controllers
 
         }
         /// <summary>
-        /// add Like to post
+        /// remove like from post
+        /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/remove-like")]
+        public async Task<bool> RemoveLikePostAsync(Guid userId, Guid postId)
+        {
+            return await _mediator.Send(new RemoveLikePostCommand(userId, postId));
+
+        }
+        /// <summary>
+        /// add dislike to post
         /// </summary>
         /// <returns>bool</returns>
         /// /// <param name="userId">for user</param>
@@ -69,7 +83,20 @@ namespace Dislinkt.Posts.WebApi.Controllers
             return await _mediator.Send(new AddDislikeCommand(userId, postId));
 
         }
+        /// <summary>
+        /// remove dislike from post
+        /// </summary>
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/remove-dislike")]
+        public async Task<bool> RemoveDislikePostAsync(Guid userId, Guid postId)
+        {
+            return await _mediator.Send(new RemoveDislikeCommand(userId, postId));
 
+        }
         /// <summary>
         /// Get all user posts
         /// </summary>

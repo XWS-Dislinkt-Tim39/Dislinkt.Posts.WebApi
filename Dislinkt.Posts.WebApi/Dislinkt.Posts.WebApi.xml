@@ -29,9 +29,25 @@
             /// <param name="userId">for user</param>
             /// <param name="postId">for post</param>
         </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.RemoveLikePostAsync(System.Guid,System.Guid)">
+            <summary>
+            remove like from post
+            </summary>
+            <returns>bool</returns>
+            /// <param name="userId">for user</param>
+            /// <param name="postId">for post</param>
+        </member>
         <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.AddDislikePostAsync(System.Guid,System.Guid)">
             <summary>
-            add Like to post
+            add dislike to post
+            </summary>
+            <returns>bool</returns>
+            /// <param name="userId">for user</param>
+            /// <param name="postId">for post</param>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.RemoveDislikePostAsync(System.Guid,System.Guid)">
+            <summary>
+            remove dislike from post
             </summary>
             <returns>bool</returns>
             /// <param name="userId">for user</param>
