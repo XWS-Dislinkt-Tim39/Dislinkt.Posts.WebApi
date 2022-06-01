@@ -25,9 +25,9 @@
             <summary>
             Get all user posts
             </summary>
-            <returns>All user posts</returns>
-            /// <param userId="userId">for user</param>
-            /// /// <param postId="postId">for user</param>
+            <returns>bool</returns>
+            /// <param name="userId">for user</param>
+            /// <param name="postId">for post</param>
         </member>
         <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.GetUserPostsAsync(System.Guid)">
             <summary>

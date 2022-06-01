@@ -43,10 +43,10 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <summary>
         /// Get all user posts
         /// </summary>
-        /// <returns>All user posts</returns>
-        /// /// <param userId="userId">for user</param>
-        /// /// /// <param postId="postId">for user</param>
-        [HttpPost]
+        /// <returns>bool</returns>
+        /// /// <param name="userId">for user</param>
+        /// /// <param name="postId">for post</param>
+        [HttpGet]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/add-like")]
         public async Task<bool> AddLikePostAsync(Guid userId,Guid postId)
