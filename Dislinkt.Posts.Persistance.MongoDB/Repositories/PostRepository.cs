@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dislinkt.Posts.Domain.Users;
+using Dislinkt.Posts.Domain.Comments;
 
 namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
 {
@@ -91,6 +92,15 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             var filter = Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, postId));
 
             var update = Builders<UserPostsEntity>.Update.Pull(u => u.Posts[-1].Dislikes, userId);
+
+
+            await _queryExecutor.UpdateAsync(filter, update);
+        }
+        public async Task AddCommentToUserPostAsync(Comment comment, Guid postId)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, postId));
+
+            var update = Builders<UserPostsEntity>.Update.AddToSet(u => u.Posts[-1].Comments, comment);
 
 
             await _queryExecutor.UpdateAsync(filter, update);
