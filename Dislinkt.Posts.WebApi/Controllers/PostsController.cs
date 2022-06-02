@@ -1,4 +1,5 @@
 ﻿using Dislinkt.Posts.Application.Posts.NewPost;
+using Dislinkt.Posts.Application.Posts.PostComment.Commands;
 using Dislinkt.Posts.Application.Posts.PostDislike.Commands;
 using Dislinkt.Posts.Application.Posts.PostLike.Commands;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
@@ -95,6 +96,20 @@ namespace Dislinkt.Posts.WebApi.Controllers
         public async Task<bool> RemoveDislikePostAsync(Guid userId, Guid postId)
         {
             return await _mediator.Send(new RemoveDislikeCommand(userId, postId));
+
+        }
+
+        /// <summary>
+        /// Add new comment
+        /// </summary>
+        /// <returns>Status of publishing post</returns>
+        /// /// <param name="commentData">for post</param>
+        [HttpPost]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/add-comment")]
+        public async Task<bool> AddCommentAsync(AddCommentData commentData)
+        {
+            return await _mediator.Send(new AddCommentCommand(commentData));
 
         }
         /// <summary>
