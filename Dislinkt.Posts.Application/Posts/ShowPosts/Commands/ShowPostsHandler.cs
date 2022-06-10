@@ -19,7 +19,12 @@ namespace Dislinkt.Posts.Application.Posts.ShowPosts.Commands
 
             var userPosts = await _postRepository.GetByUserId(request.UserId);
 
-            return userPosts.Posts;
+            if (userPosts == null)
+            {
+                return null;
+            }
+
+            return userPosts.Posts; ;
         }
     }
 }
