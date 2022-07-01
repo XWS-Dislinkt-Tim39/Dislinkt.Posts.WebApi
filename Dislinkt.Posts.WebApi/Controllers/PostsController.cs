@@ -36,7 +36,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="postData">for post</param>
         [HttpPost]
         [SwaggerOperation(Tags = new[] { ApiTag })]
-        [Route("/add-post")]
+        [Route("/post")]
         public async Task<bool> AddPostAsync(PostData postData)
         {
             return await _mediator.Send(new NewPostCommand(postData));
@@ -119,7 +119,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="id">for user</param>
         [HttpGet]
         [SwaggerOperation(Tags = new[] { ApiTag })]
-        [Route("/user-posts")]
+        [Route("/post")]
         public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)
         {
             return await _mediator.Send(new ShowPostsCommand(id));
