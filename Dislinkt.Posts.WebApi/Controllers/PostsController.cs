@@ -5,6 +5,7 @@ using Dislinkt.Posts.Application.Posts.PostLike.Commands;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
 using Dislinkt.Posts.Domain.Posts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -35,6 +36,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <returns>Status of publishing post</returns>
         /// /// <param name="postData">for post</param>
         [HttpPost]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/post")]
         public async Task<bool> AddPostAsync(PostData postData)
@@ -49,6 +51,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="userId">for user</param>
         /// /// <param name="postId">for post</param>
         [HttpGet]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/add-like")]
         public async Task<bool> AddLikePostAsync(Guid userId,Guid postId)
@@ -63,6 +66,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="userId">for user</param>
         /// /// <param name="postId">for post</param>
         [HttpGet]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/remove-like")]
         public async Task<bool> RemoveLikePostAsync(Guid userId, Guid postId)
@@ -77,6 +81,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="userId">for user</param>
         /// /// <param name="postId">for post</param>
         [HttpGet]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/add-dislike")]
         public async Task<bool> AddDislikePostAsync(Guid userId, Guid postId)
@@ -91,6 +96,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// /// <param name="userId">for user</param>
         /// /// <param name="postId">for post</param>
         [HttpGet]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/remove-dislike")]
         public async Task<bool> RemoveDislikePostAsync(Guid userId, Guid postId)
@@ -105,6 +111,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <returns>Status of publishing post</returns>
         /// /// <param name="commentData">for post</param>
         [HttpPost]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/add-comment")]
         public async Task<bool> AddCommentAsync(AddCommentData commentData)
@@ -118,6 +125,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <returns>All user posts</returns>
         /// /// <param name="id">for user</param>
         [HttpGet]
+        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/post")]
         public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)
