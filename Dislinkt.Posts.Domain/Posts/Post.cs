@@ -1,4 +1,5 @@
 ﻿using System;
+using Dislinkt.Posts.Domain.Comments;
 
 namespace Dislinkt.Posts.Domain.Posts
 {
@@ -9,16 +10,18 @@ namespace Dislinkt.Posts.Domain.Posts
         public byte[] Image { get; }
         public string Link { get; }
         public DateTime DateTimeOfPublishing { get; }
-        public Guid[] UsersLiked { get; }
+        public Guid[] Likes { get; }
+        public Guid[] Dislikes { get; }
         public Comment[] Comments { get; }
-        public Post(Guid id, string text, byte[] image, string link, DateTime dateTime, Guid[] usersLiked, Comment[] comments)
+        public Post(Guid id, string text, DateTime dateTime, Guid[] likes, Guid[] dislikes, Comment[] comments)
         {
             Id = id;
             Text = text;
             Image = image;
             Link = link;
             DateTimeOfPublishing = dateTime;
-            UsersLiked = usersLiked;
+            Likes = likes;
+            Dislikes = dislikes;
             Comments = comments;
         }
     }

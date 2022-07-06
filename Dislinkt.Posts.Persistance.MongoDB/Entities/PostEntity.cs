@@ -1,4 +1,5 @@
-﻿using Dislinkt.Posts.Domain.Posts;
+﻿using Dislinkt.Posts.Domain.Comments;
+using Dislinkt.Posts.Domain.Posts;
 using System;
 using System.Linq;
 
@@ -10,21 +11,22 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Entities
         public byte[] Image { get; set; }
         public string Link { get; set; }
         public DateTime DateTimeOfPublishing { get; set; }
-        public Guid[] UsersLiked { get; set; }
-        public CommentEntity[] Comments { get; set; }
+        public Guid[] Likes { get; set; }
+        public Guid[] Dislikes { get; set; }
+        public Comment[] Comments { get; set; }
         public Post ToPost()
-            => new Post(this.Id, this.Text, this.Image, this.Link, this.DateTimeOfPublishing, this.UsersLiked, this.Comments?.Select(a => a.ToComment())?.ToArray());
+            => new Post(this.Id, this.Text, this.DateTimeOfPublishing,this.Likes,this.Dislikes,this.Comments);
+            
         public static PostEntity ToPostEntity(Post post)
         {
             return new PostEntity
             {
                 Id = post.Id,
                 Text = post.Text,
-                Image = post.Image,
-                Link = post.Link,
                 DateTimeOfPublishing = post.DateTimeOfPublishing,
-                UsersLiked = post.UsersLiked,
-                Comments = post.Comments.Select(c => CommentEntity.ToCommentEntity(c)).ToArray()
+                Likes = post.Likes,
+                Dislikes=post.Dislikes,
+                Comments =post.Comments
             }; 
         }
     }
