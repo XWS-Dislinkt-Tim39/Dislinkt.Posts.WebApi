@@ -18,6 +18,7 @@ using Dislinkt.Posts.Application.Posts.NewPost;
 using Dislinkt.Posts.Persistance.MongoDB.Factories;
 using Dislinkt.Posts.Core.Repositories;
 using Dislinkt.Posts.Persistance.MongoDB.Repositories;
+using Prometheus;
 
 namespace Dislinkt.Posts.WebApi
 {
@@ -99,12 +100,14 @@ namespace Dislinkt.Posts.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseHttpMetrics();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
         }
     }
