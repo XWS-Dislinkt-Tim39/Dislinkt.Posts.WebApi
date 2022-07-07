@@ -9,8 +9,8 @@ FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Dislinkt.Posts.WebApi/Dislinkt.Posts.WebApi.csproj", "Dislinkt.Posts.WebApi/"]
 COPY ["Dislinkt.Posts/Dislinkt.Posts.csproj", "Dislinkt.Posts/"]
-COPY ["Dislinkt.Posts.Persistance.MongoDB/Dislinkt.Posts.Persistance.MongoDB.csproj", "Dislinkt.Posts.Persistance.MongoDB/"]
 COPY ["Dislinkt.Posts.Domain/Dislinkt.Posts.Domain.csproj", "Dislinkt.Posts.Domain/"]
+COPY ["Dislinkt.Posts.Persistance.MongoDB/Dislinkt.Posts.Persistance.MongoDB.csproj", "Dislinkt.Posts.Persistance.MongoDB/"]
 COPY ["Dislinkt.Posts.Core/Dislinkt.Posts.Core.csproj", "Dislinkt.Posts.Core/"]
 COPY ["Dislinkt.Posts.Application/Dislinkt.Posts.Application.csproj", "Dislinkt.Posts.Application/"]
 RUN dotnet restore "Dislinkt.Posts.WebApi/Dislinkt.Posts.WebApi.csproj"
