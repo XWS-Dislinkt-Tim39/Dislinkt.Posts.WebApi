@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,9 +8,20 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\Natalija\OneDrive\Documents\Dislinkt\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>   
+ <ItemGroup>  
+  <Protobuf Remove="Protos\addNotification.proto" />  
+  </ItemGroup> 
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.21.2" />
+    <PackageReference Include="Grpc.Core.Api" Version="2.46.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.46.0" />
+    <PackageReference Include="Grpc.Net.Common" Version="2.46.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.46.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.24" />
@@ -29,6 +40,13 @@
     <ProjectReference Include="..\Dislinkt.Posts.Persistance.MongoDB\Dislinkt.Posts.Persistance.MongoDB.csproj" />
     <ProjectReference Include="..\Dislinkt.Posts\Dislinkt.Posts.csproj" />
   </ItemGroup>
+
+    <ItemGroup>  
+  <Protobuf Include="Protos\addNotification.proto" GrpcServices="Client" />  
+  </ItemGroup> 
+
+
+
 
 
 </Project>

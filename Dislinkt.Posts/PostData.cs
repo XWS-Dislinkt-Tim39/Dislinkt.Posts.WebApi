@@ -17,7 +17,9 @@ namespace Dislinkt.Posts
         /// Date time of publishing+
         /// </summary>
         public DateTime DateTimeOfPublishing { get; set; }
-      
-       
+
+        public string[] followersId { get; set; }
+
+
     }
 }

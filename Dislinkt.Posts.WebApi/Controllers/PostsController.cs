@@ -4,12 +4,16 @@ using Dislinkt.Posts.Application.Posts.PostDislike.Commands;
 using Dislinkt.Posts.Application.Posts.PostLike.Commands;
 using Dislinkt.Posts.Application.Posts.ShowPosts.Commands;
 using Dislinkt.Posts.Domain.Posts;
+using Grpc.Net.Client;
+using GrpcAddNotificationService;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Dislinkt.Posts.WebApi.Controllers
@@ -41,7 +45,26 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/post")]
         public async Task<bool> AddPostAsync(PostData postData)
         {
-            return await _mediator.Send(new NewPostCommand(postData));
+            await _mediator.Send(new NewPostCommand(postData));
+
+            var channel = GrpcChannel.ForAddress("https://localhost:5002/");
+            var client = new addNotificationGreeter.addNotificationGreeterClient(channel);
+
+            foreach (string item in postData.followersId)
+            {
+                var reply = client.addNotification(new NotificationRequest { UserId =item, From = postData.UserId.ToString(), Type = "Post", Seen = false });
+
+                if (!reply.Successful)
+                {
+                    Debug.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
+                    return false;
+                }
+
+                Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
+            }
+          
+
+            return true;
 
         }
         /// <summary>
