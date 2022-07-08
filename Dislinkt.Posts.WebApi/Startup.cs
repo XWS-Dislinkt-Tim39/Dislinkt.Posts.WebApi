@@ -20,6 +20,7 @@ using Dislinkt.Posts.Core.Repositories;
 using Dislinkt.Posts.Persistance.MongoDB.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Prometheus;
 
 namespace Dislinkt.Posts.WebApi
 {
@@ -121,6 +122,7 @@ namespace Dislinkt.Posts.WebApi
         /// </summary>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMetricServer();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -143,11 +145,13 @@ namespace Dislinkt.Posts.WebApi
             });
             app.UseAuthentication();
             app.UseRouting();
+            app.UseHttpMetrics();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
         }
     }
