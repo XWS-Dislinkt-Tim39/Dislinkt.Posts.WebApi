@@ -8,14 +8,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\DELL\Desktop\posts new\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\Natalija\OneDrive\Desktop\Dislinkt\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi\Dislinkt.Posts.WebApi.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="packages.config" />
+  </ItemGroup>
 
  <ItemGroup>  
   <Protobuf Remove="Protos\addNotification.proto" />  
   </ItemGroup> 
   <ItemGroup>  
   <Protobuf Remove="Protos\addActivity.proto" />  
+  </ItemGroup> 
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup> 
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.21.2" />
