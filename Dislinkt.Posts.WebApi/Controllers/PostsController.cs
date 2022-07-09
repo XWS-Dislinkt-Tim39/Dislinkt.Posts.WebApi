@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using OpenTracing;
 
 namespace Dislinkt.Posts.WebApi.Controllers
 {
@@ -27,12 +28,14 @@ namespace Dislinkt.Posts.WebApi.Controllers
     {
         private const string ApiTag = "Posts";
         private readonly IMediator _mediator;
+        private readonly ITracer _tracer;
         /// <summary>
         /// Init of controller
         /// </summary>
-        public PostsController(IMediator mediator)
+        public PostsController(IMediator mediator, ITracer tracer)
         {
             _mediator = mediator;
+            _tracer = tracer;
         }
         /// <summary>
         /// Add new post
@@ -45,6 +48,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/post")]
         public async Task<bool> AddPostAsync(PostData postData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             await _mediator.Send(new NewPostCommand(postData));
 
             var channel = GrpcChannel.ForAddress("https://localhost:5002/");
@@ -79,6 +84,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/add-like")]
         public async Task<bool> AddLikePostAsync(Guid userId,Guid postId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new AddLikePostCommand(userId,postId));
 
         }
@@ -94,6 +101,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/remove-like")]
         public async Task<bool> RemoveLikePostAsync(Guid userId, Guid postId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new RemoveLikePostCommand(userId, postId));
 
         }
@@ -109,6 +118,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/add-dislike")]
         public async Task<bool> AddDislikePostAsync(Guid userId, Guid postId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new AddDislikeCommand(userId, postId));
 
         }
@@ -124,6 +135,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/remove-dislike")]
         public async Task<bool> RemoveDislikePostAsync(Guid userId, Guid postId)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new RemoveDislikeCommand(userId, postId));
 
         }
@@ -139,6 +152,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/add-comment")]
         public async Task<bool> AddCommentAsync(AddCommentData commentData)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new AddCommentCommand(commentData));
 
         }
@@ -153,6 +168,8 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Route("/post")]
         public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)
         {
+            var actionName = ControllerContext.ActionDescriptor.DisplayName;
+            using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new ShowPostsCommand(id));
 
         }
