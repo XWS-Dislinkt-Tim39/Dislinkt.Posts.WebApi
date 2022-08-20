@@ -175,7 +175,6 @@ namespace Dislinkt.Posts.WebApi.Controllers
         /// <returns>All user posts</returns>
         /// /// <param name="id">for user</param>
         [HttpGet]
-        [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/post")]
         public async Task<IReadOnlyList<Post>> GetUserPostsAsync(Guid id)
