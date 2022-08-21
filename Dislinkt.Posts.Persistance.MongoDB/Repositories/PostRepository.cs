@@ -32,11 +32,13 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             }
         }
 
-        public async Task CreateAsync(UserPosts userPosts)
+        public async Task<Guid> CreateAsync(UserPosts userPosts)
         {
             try
             {
                 await _queryExecutor.CreateAsync(UserPostsEntity.ToUserPostsEntity(userPosts));
+                var id = userPosts.Id;
+                return userPosts.Id;
             } catch(MongoWriteException ex)
             {
                 throw ex;
@@ -114,6 +116,17 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Repositories
             var update = Builders<UserPostsEntity>.Update.Set(s => s.Posts, posts.Select(s => PostEntity.ToPostEntity(s)));
 
             await _queryExecutor.UpdateAsync(filter, update);
+          
+        }
+
+        public async Task SaveImage(Guid id,string image)
+        {
+            var filter = Builders<UserPostsEntity>.Filter.ElemMatch(u => u.Posts, Builders<PostEntity>.Filter.Eq(u => u.Id, id));
+
+            var update = Builders<UserPostsEntity>.Update
+                .Set(u => u.Posts[-1].Image, image);
+            await _queryExecutor.UpdateAsync(filter, update);
+
         }
     }
 }

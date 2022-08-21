@@ -1,4 +1,5 @@
 ﻿using Dislinkt.Posts.Domain.Comments;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace Dislinkt.Posts
@@ -16,6 +17,7 @@ namespace Dislinkt.Posts
         /// <summary>
         /// Date time of publishing+
         /// </summary>
+        /// 
         public DateTime DateTimeOfPublishing { get; set; }
 
         public string[] followersId { get; set; }
