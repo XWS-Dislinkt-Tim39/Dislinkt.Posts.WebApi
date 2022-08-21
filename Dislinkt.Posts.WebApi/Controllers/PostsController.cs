@@ -17,6 +17,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenTracing;
+using Newtonsoft.Json;
+using System.IO;
+using Dislinkt.Posts.Core.Repositories;
+using Dislinkt.Posts.Persistance.MongoDB.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace Dislinkt.Posts.WebApi.Controllers
 {
@@ -30,13 +35,15 @@ namespace Dislinkt.Posts.WebApi.Controllers
         private const string ApiTag = "Posts";
         private readonly IMediator _mediator;
         private readonly ITracer _tracer;
+        private readonly IPostRepository _postRepository;
         /// <summary>
         /// Init of controller
         /// </summary>
-        public PostsController(IMediator mediator, ITracer tracer)
+        public PostsController(IPostRepository postRepository,IMediator mediator, ITracer tracer)
         {
             _mediator = mediator;
             _tracer = tracer;
+            _postRepository = postRepository;
         }
         /// <summary>
         /// Add new post
@@ -47,11 +54,12 @@ namespace Dislinkt.Posts.WebApi.Controllers
         [Authorize]
         [SwaggerOperation(Tags = new[] { ApiTag })]
         [Route("/post")]
-        public async Task<bool> AddPostAsync(PostData postData)
+        public async Task<Post> AddPostAsync(PostData postData)
         {
             var actionName = ControllerContext.ActionDescriptor.DisplayName;
             using var scope = _tracer.BuildSpan(actionName).StartActive(true);
-            await _mediator.Send(new NewPostCommand(postData));
+
+            var newPost = await _mediator.Send(new NewPostCommand(postData));
 
             var channel = GrpcChannel.ForAddress("https://localhost:5002/");
             var client = new addNotificationGreeter.addNotificationGreeterClient(channel);
@@ -63,7 +71,7 @@ namespace Dislinkt.Posts.WebApi.Controllers
                 if (!reply.Successful)
                 {
                     Debug.WriteLine("Doslo je do greske prilikom kreiranja notifikacija za usera");
-                    return false;
+                    return null;
                 }
 
                 Debug.WriteLine("Uspesno prosledjen na registraciju u notifikacijama -- " + reply.Message);
@@ -76,12 +84,12 @@ namespace Dislinkt.Posts.WebApi.Controllers
             if (!reply2.Successful)
             {
                 Debug.WriteLine("Doslo je do greske prilikom kreiranja eventa za admina");
-                return false;
+                return null;
             }
 
             Debug.WriteLine("Uspesno prosledjen na dashboard kod admina-- " + reply2.Message);
 
-            return true;
+            return newPost;
 
         }
         /// <summary>
@@ -182,6 +190,29 @@ namespace Dislinkt.Posts.WebApi.Controllers
             var actionName = ControllerContext.ActionDescriptor.DisplayName;
             using var scope = _tracer.BuildSpan(actionName).StartActive(true);
             return await _mediator.Send(new ShowPostsCommand(id));
+
+        }
+        /// <summary>
+        /// Get all user posts
+        /// </summary>
+        /// <returns>All user posts</returns>
+        /// /// <param name="image">for user</param>
+        /// /// /// <param name="postId">for user</param>
+        [HttpPost,DisableRequestSizeLimit]
+        [SwaggerOperation(Tags = new[] { ApiTag })]
+        [Route("/save-image/{postId}")]
+        public Boolean SaveImage([FromForm]IFormFile image,[FromRoute]Guid postId)
+        {
+            if (image != null)
+            {
+                MemoryStream memoryStream=new MemoryStream();
+                image.OpenReadStream().CopyTo(memoryStream);
+                var imageString=Convert.ToBase64String(memoryStream.ToArray());
+
+                _postRepository.SaveImage(postId, imageString);
+                
+            }
+            return true;
 
         }
     }

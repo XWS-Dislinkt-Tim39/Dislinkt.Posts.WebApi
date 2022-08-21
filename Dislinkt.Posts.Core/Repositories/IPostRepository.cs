@@ -17,7 +17,8 @@ namespace Dislinkt.Posts.Core.Repositories
         Task RemoveDislikeFromUserPostAsync(Guid userId, Guid postId);
         Task AddCommentToUserPostAsync(Comment comment, Guid postId);
 
-        Task CreateAsync(UserPosts userPosts);
+        Task<Guid> CreateAsync(UserPosts userPosts);
         Task UpdateAsync(Guid id, Post[] posts);
+        Task SaveImage(Guid id, string image);
     }
 }
