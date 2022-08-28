@@ -1,6 +1,4 @@
-﻿using Dislinkt.Posts.Domain.Comments;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 
 namespace Dislinkt.Posts
 {
