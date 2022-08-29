@@ -9,7 +9,7 @@
             Posts controler
             </summary>
         </member>
-        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.#ctor(MediatR.IMediator,OpenTracing.ITracer)">
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.#ctor(Dislinkt.Posts.Core.Repositories.IPostRepository,MediatR.IMediator,OpenTracing.ITracer)">
             <summary>
             Init of controller
             </summary>
@@ -66,6 +66,14 @@
             </summary>
             <returns>All user posts</returns>
             /// <param name="id">for user</param>
+        </member>
+        <member name="M:Dislinkt.Posts.WebApi.Controllers.PostsController.SaveImage(Microsoft.AspNetCore.Http.IFormFile,System.Guid)">
+            <summary>
+            Get all user posts
+            </summary>
+            <returns>All user posts</returns>
+            /// <param name="image">for user</param>
+            /// /// <param name="postId">for user</param>
         </member>
         <member name="T:Dislinkt.Posts.WebApi.Program">
             <summary>

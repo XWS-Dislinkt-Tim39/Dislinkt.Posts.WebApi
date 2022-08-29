@@ -9,6 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Dislinkt.Posts.Core\Dislinkt.Posts.Core.csproj" />
 	  <ProjectReference Include="..\Dislinkt.Posts.Domain\Dislinkt.Posts.Domain.csproj" />
 	</ItemGroup>
 </Project>
