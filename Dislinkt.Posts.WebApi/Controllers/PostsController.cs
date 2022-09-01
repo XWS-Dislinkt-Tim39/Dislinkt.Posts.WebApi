@@ -45,6 +45,12 @@ namespace Dislinkt.Posts.WebApi.Controllers
             _tracer = tracer;
             _postRepository = postRepository;
         }
+        [Route("/")]
+        [HttpGet]
+        public string Index()
+        {
+            return "Hello from Posts/Controller";
+        }
         /// <summary>
         /// Add new post
         /// </summary>

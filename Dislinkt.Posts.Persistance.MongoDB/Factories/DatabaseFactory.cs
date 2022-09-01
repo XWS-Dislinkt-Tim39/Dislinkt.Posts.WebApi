@@ -6,7 +6,7 @@ namespace Dislinkt.Posts.Persistance.MongoDB.Factories
     {
         public IMongoDatabase Create()
         {
-            var mongoClient = new MongoClient("mongodb://localhost:27017");
+            var mongoClient = new MongoClient("mongodb://mongodb:27017");
             return mongoClient.GetDatabase("PostDB");
         }
     }
